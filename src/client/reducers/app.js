@@ -15,6 +15,6 @@ export const appData = (state = initialState, action) => {
       }
 
     default:
-      break;
+      return state;
   }
 }
