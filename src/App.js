@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
+import { getData } from './client/actions/app';
 
 class App extends Component {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(getData());
+  }
+
   render() {
-    const { data } = this.props;
+    const { data, loading } = this.props;
+    
     return (
       <div className="App">
         <header className="App-header">
@@ -21,6 +29,18 @@ class App extends Component {
           >
             Learn React
           </a>
+          <br />
+          {!loading &&
+            data.map((item, index) => {
+            return(
+              <div style={{ marginTop: 15 }} key={index}>
+                <b>{item.username}</b><br/>
+                <label>{item.name}</label>
+              </div>
+              )
+            }
+          )}
+          <p>{loading}</p>
         </header>
       </div>
     );
@@ -28,6 +48,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  ...state
+  data: state.app.data,
+  loading: state.app.loading,
 })
 export default connect(mapStateToProps)(App)

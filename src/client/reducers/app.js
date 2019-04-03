@@ -5,7 +5,7 @@ const initialState = {
   loading: true,
 }
 
-export const appData = (state = initialState, action) => {
+export const app = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_INDEX_DATA_FULLFILLED:
       return {

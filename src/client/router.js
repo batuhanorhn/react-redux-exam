@@ -5,9 +5,14 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux'
 
 import App from '../App'
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-const store = createStore(rootReducer)
+
+const store = createStore(
+ rootReducer,
+ applyMiddleware(thunk)
+ )
 
 class Router extends React.Component {
 
